@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if artistas|length == 0 %}
+        <p>Não há Artistas registrados</p>
+    {% else %}
+    <table border="1">
+        <thead>
+            <th>Nome</th>
+            <th>Nacionalidade</th>
+            <th>Idade</th>
+        <tbody>
+            {% for artista in artistas %}
+            <tr>
+                <td>{{artista.nome}}</td>
+                <td>{{artista.nacionalidade}}</td>
+                <td>{{artista.idade}}</td>
+                <td><a href="{% url 'edita-artista' artista.id%}">Editar</a></td>
+                <td><a href="{% url 'remove-artista' artista.id%}">Remover</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    <a href="{% url 'cria-artista' %}">Registrar Artista</a>
+
+{% endblock %}

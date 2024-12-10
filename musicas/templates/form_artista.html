@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if artista is not None %}
+        <h2>Editar Artista</h2>
+    {% else %}
+        <h2>Novo Artista</h2>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nome">
+            Nome:
+            <input type="text" name="nome" maxlength="100" value="{{ artista.nome }}">
+        </label>
+        <label for="nacionalidade">
+            Nacionalidade:
+            <input type="text" name="nacionalidade" maxlength="100" value="{{ artista.nacionalidade }}">
+        </label>
+        <label for="idade">
+            Idade:
+            <input type="text" name="idade" maxlength="100" value="{{ artista.idade }}">
+        </label>
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

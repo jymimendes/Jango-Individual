@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if musicas|length == 0 %}
+        <p>Não há Musicas registradas</p>
+    {% else %}
+        <table border="1">
+            <thead>
+                <th>Nome</th>
+                <th>Artista</th>
+            <tbody>
+                {% for musica in musicas %}
+                <tr>
+                    <td>{{musica.nome}}</td>
+                    <td>{{musica.artista}}</td>
+                    <td><a href="{% url 'edita-musica' musica.id%}">Editar</a></td>
+                    <td><a href="{% url 'remove-musica' musica.id%}">Remover</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a href="{% url 'cria-musica' %}">Registrar Musica</a>
+
+{% endblock %}

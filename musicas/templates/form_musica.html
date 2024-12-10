@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if musica is not None %}
+        <h2>Editar musica</h2>
+    {% else %}
+        <h2>Novo musica</h2>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nome">
+            Nome:
+            <input type="text" name="nome" maxlength="100" value="{{ musica.nome }}">
+        </label>
+        <label for="artista">
+            Artista:
+            {% if artistas|length == 0 %}
+                Não há <a href="{% url 'lista-artistas' %}">Artistas</a> registrados
+            {% else %}
+                <select name="artista">
+                        {% for artista in artistas %}
+                            {% if stand.artista.id == artista.id%}
+                                <option value="{{artista.id}}" selected>{{artista.nome}}</option>
+                            {% else %}
+                                <option value="{{artista.id}}">{{artista.nome}}</option>
+                            {% endif %} 
+                        {% endfor %}
+                </select>
+            {% endif %}
+        </label>
+        {% if artistas|length != 0%}
+        <button type="submit">Salvar</button>
+        {% endif %}
+    </form>
+{% endblock %}
